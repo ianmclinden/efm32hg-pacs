@@ -125,6 +125,34 @@ unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {
         self as u16
     }
 }
+#[doc = "The DI page holds factory calibration values, the unique device number and the memory sizes. It is read-only."]
+pub struct DEVINFO {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for DEVINFO {}
+impl DEVINFO {
+    #[doc = r"Pointer to the register block"]
+    pub const PTR: *const devinfo::RegisterBlock = 0x0fe0_81b0 as *const _;
+    #[doc = r"Return the pointer to the register block"]
+    #[inline(always)]
+    pub const fn ptr() -> *const devinfo::RegisterBlock {
+        Self::PTR
+    }
+}
+impl Deref for DEVINFO {
+    type Target = devinfo::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*Self::PTR }
+    }
+}
+impl core::fmt::Debug for DEVINFO {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("DEVINFO").finish()
+    }
+}
+#[doc = "The DI page holds factory calibration values, the unique device number and the memory sizes. It is read-only."]
+pub mod devinfo;
 #[doc = "DMA"]
 pub struct DMA {
     _marker: PhantomData<*const ()>,
@@ -774,6 +802,8 @@ static mut DEVICE_PERIPHERALS: bool = false;
 #[doc = r" All the peripherals."]
 #[allow(non_snake_case)]
 pub struct Peripherals {
+    #[doc = "DEVINFO"]
+    pub DEVINFO: DEVINFO,
     #[doc = "DMA"]
     pub DMA: DMA,
     #[doc = "USB"]
@@ -842,6 +872,9 @@ impl Peripherals {
     pub unsafe fn steal() -> Self {
         DEVICE_PERIPHERALS = true;
         Peripherals {
+            DEVINFO: DEVINFO {
+                _marker: PhantomData,
+            },
             DMA: DMA {
                 _marker: PhantomData,
             },
