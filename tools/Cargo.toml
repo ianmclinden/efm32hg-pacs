@@ -1,0 +1,18 @@
+[package]
+name = "tools"
+version = "0.1.0"
+edition = "2021"
+# Never published: this is just a tool to recompile the pacs
+publish = false
+default-run = "generate"
+
+[dependencies]
+# Pinned to the currently used version
+svd2rust = "=0.28.0"
+# Pinned to what svd2rust uses
+proc-macro2 = "=1.0.86"
+form = "0.10"
+
+[[bin]]
+name = "generate"
+path = "src/generate.rs"

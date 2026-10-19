@@ -27,7 +27,9 @@ fn main() {
             "src/efm32hg322/device.x"
         } else if env::var_os("CARGO_FEATURE_EFM32HG350").is_some() {
             "src/efm32hg350/device.x"
-        } else { panic!("No device features selected"); };
+        } else {
+            panic!("No device features selected");
+        };
 
         fs::copy(device_file, out.join("device.x")).unwrap();
         println!("cargo:rerun-if-changed={}", device_file);
@@ -35,4 +37,3 @@ fn main() {
 
     println!("cargo:rerun-if-changed=build.rs");
 }
-

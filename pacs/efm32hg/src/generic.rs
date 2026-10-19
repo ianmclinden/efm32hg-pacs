@@ -688,7 +688,6 @@ where
     }
 }
 
-
 mod atomic {
     use portable_atomic::Ordering;
 
@@ -790,4 +789,3 @@ where
         REG::Ux::atomic_xor(self.register.as_ptr(), bits);
     }
 }
-
