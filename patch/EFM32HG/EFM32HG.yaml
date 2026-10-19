@@ -1,0 +1,177 @@
+# DEVINFO (device information page) for EFM32HGxx.
+# Source: Reference manual rev 0.91, Section 5.6, Table 5.4.
+
+_add:
+  DEVINFO:
+    description: The DI page holds factory calibration values, the unique device number and the memory sizes. It is read-only.
+    baseAddress: 0x0FE081B0
+    addressBlock:
+      offset: 0
+      size: 0x50
+      usage: registers
+    registers:
+      CAL:
+        description: Calibration temperature and checksum
+        addressOffset: 0x00
+        size: 32
+        fields:
+          CRC:
+            description: CRC-16 of the DI page data
+            bitOffset: 0
+            bitWidth: 16
+            access: read-only
+          TEMP:
+            description: Calibration temperature in degrees Celsius
+            bitOffset: 16
+            bitWidth: 8
+            access: read-only
+      USHFRCOCAL0:
+        description: USHFRCO calibration register
+        addressOffset: 0x1c
+        size: 32
+        fields:
+          BAND24_TUNING:
+            description: TUNING value for the 24 MHz USHFRCO band
+            bitOffset: 0
+            bitWidth: 7
+            access: read-only
+          BAND24_FINETUNING:
+            description: FINETUNING value for the 24 MHz USHFRCO band
+            bitOffset: 8
+            bitWidth: 6
+            access: read-only
+          BAND48_TUNING:
+            description: TUNING value for the 48 MHz USHFRCO band
+            bitOffset: 16
+            bitWidth: 7
+            access: read-only
+          BAND48_FINETUNING:
+            description: FINETUNING value for the 48 MHz USHFRCO band
+            bitOffset: 24
+            bitWidth: 6
+            access: read-only
+      AUXHFRCOCAL0:
+        description: AUXHFRCO calibration register 0
+        addressOffset: 0x24
+        size: 32
+        fields:
+          BAND1:
+            description: TUNING value for the 1.2 MHz AUXHFRCO band
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+          BAND7:
+            description: TUNING value for the 6.6 MHz AUXHFRCO band
+            bitOffset: 8
+            bitWidth: 8
+            access: read-only
+          BAND11:
+            description: TUNING value for the 11 MHz AUXHFRCO band
+            bitOffset: 16
+            bitWidth: 8
+            access: read-only
+          BAND14:
+            description: TUNING value for the 14 MHz AUXHFRCO band
+            bitOffset: 24
+            bitWidth: 8
+            access: read-only
+      AUXHFRCOCAL1:
+        description: AUXHFRCO calibration register 1
+        addressOffset: 0x28
+        size: 8
+        fields:
+          BAND21:
+            description: TUNING value for the 21 MHz AUXHFRCO band
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      HFRCOCAL0:
+        description: HFRCO calibration register 0
+        addressOffset: 0x2c
+        size: 32
+        fields:
+          BAND1:
+            description: TUNING value for the 1.2 MHz HFRCO band
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+          BAND7:
+            description: TUNING value for the 6.6 MHz HFRCO band
+            bitOffset: 8
+            bitWidth: 8
+            access: read-only
+          BAND11:
+            description: TUNING value for the 11 MHz HFRCO band
+            bitOffset: 16
+            bitWidth: 8
+            access: read-only
+          BAND14:
+            description: TUNING value for the 14 MHz HFRCO band
+            bitOffset: 24
+            bitWidth: 8
+            access: read-only
+      HFRCOCAL1:
+        description: HFRCO calibration register 1
+        addressOffset: 0x30
+        size: 8
+        fields:
+          BAND21:
+            description: TUNING value for the 21 MHz HFRCO band
+            bitOffset: 0
+            bitWidth: 8
+            access: read-only
+      UNIQUEL:
+        description: Low 32 bits of the device unique number
+        addressOffset: 0x40
+        size: 32
+        fields:
+          UNIQUEL:
+            description: Lower part of the 64-bit unique number
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      UNIQUEH:
+        description: High 32 bits of the device unique number
+        addressOffset: 0x44
+        size: 32
+        fields:
+          UNIQUEH:
+            description: Upper part of the 64-bit unique number
+            bitOffset: 0
+            bitWidth: 32
+            access: read-only
+      MSIZE:
+        description: Flash and SRAM sizes in kilobytes
+        addressOffset: 0x48
+        size: 32
+        fields:
+          FLASH:
+            description: Flash size in kilobytes
+            bitOffset: 0
+            bitWidth: 16
+            access: read-only
+          SRAM:
+            description: SRAM size in kilobytes
+            bitOffset: 16
+            bitWidth: 16
+            access: read-only
+      PART:
+        description: Part description
+        addressOffset: 0x4c
+        size: 32
+        fields:
+          PART_NUMBER:
+            description: EFM32 part number, for example 309
+            bitOffset: 0
+            bitWidth: 16
+            access: read-only
+          DEVICE_FAMILY:
+            description: EFM32 part family number, 77 for Happy Gecko
+            bitOffset: 16
+            bitWidth: 8
+            access: read-only
+          PROD_REV:
+            description: Production revision
+            bitOffset: 24
+            bitWidth: 8
+            access: read-only

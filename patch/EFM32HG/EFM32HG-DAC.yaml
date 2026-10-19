@@ -1,0 +1,96 @@
+# DEVINFO (device information page) for EFM32HGxx with ADC & IDAC.
+# Source: Reference manual rev 0.91, Section 5.6, Table 5.4.
+# This patch adds calibration registers for the ADC and IDAC, and is not applicable to all variants
+
+DEVINFO:
+  _add:
+    ADC0CAL0:
+      description: ADC0 calibration register 0 (1V25 and 2V5 references)
+      addressOffset: 0x04
+      size: 32
+      fields:
+        OFFSET_1V25:
+          description: Offset for the 1V25 reference
+          bitOffset: 0
+          bitWidth: 7
+          access: read-only
+        GAIN_1V25:
+          description: Gain for the 1V25 reference
+          bitOffset: 8
+          bitWidth: 7
+          access: read-only
+        OFFSET_2V5:
+          description: Offset for the 2V5 reference
+          bitOffset: 16
+          bitWidth: 7
+          access: read-only
+        GAIN_2V5:
+          description: Gain for the 2V5 reference
+          bitOffset: 24
+          bitWidth: 7
+          access: read-only
+    ADC0CAL1:
+      description: ADC0 calibration register 1 (VDD and 5VDIFF references)
+      addressOffset: 0x08
+      size: 32
+      fields:
+        OFFSET_VDD:
+          description: Offset for the VDD reference
+          bitOffset: 0
+          bitWidth: 7
+          access: read-only
+        GAIN_VDD:
+          description: Gain for the VDD reference
+          bitOffset: 8
+          bitWidth: 7
+          access: read-only
+        OFFSET_5VDIFF:
+          description: Offset for the 5VDIFF reference
+          bitOffset: 16
+          bitWidth: 7
+          access: read-only
+        GAIN_5VDIFF:
+          description: Gain for the 5VDIFF reference
+          bitOffset: 24
+          bitWidth: 7
+          access: read-only
+    ADC0CAL2:
+      description: ADC0 calibration register 2 (2XVDDVSS reference and temperature reading)
+      addressOffset: 0x0c
+      size: 32
+      fields:
+        OFFSET_2XVDDVSS:
+          description: Offset for the 2XVDDVSS reference (the gain cannot be calibrated)
+          bitOffset: 0
+          bitWidth: 7
+          access: read-only
+        TEMP_READ_1V25:
+          description: Temperature sensor reading at the 1V25 reference at the calibration temperature
+          bitOffset: 20
+          bitWidth: 12
+          access: read-only
+    IDAC0CAL0:
+      description: IDAC0 calibration register
+      addressOffset: 0x18
+      size: 32
+      fields:
+        RANGE0:
+          description: Current range 0 tuning value for IDAC0
+          bitOffset: 0
+          bitWidth: 8
+          access: read-only
+        RANGE1:
+          description: Current range 1 tuning value for IDAC0
+          bitOffset: 8
+          bitWidth: 8
+          access: read-only
+        RANGE2:
+          description: Current range 2 tuning value for IDAC0
+          bitOffset: 16
+          bitWidth: 8
+          access: read-only
+        RANGE3:
+          description: Current range 3 tuning value for IDAC0
+          bitOffset: 24
+          bitWidth: 8
+          access: read-only
