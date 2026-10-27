@@ -24,7 +24,7 @@ jobs:
         run: rustup target add thumbv6m-none-eabi thumbv7em-none-eabihf thumbv7m-none-eabi thumbv8m.main-none-eabihf
       - name: Build Crates
         run: |
-          CARGO_TOML_FILES="$(find . -type f -name 'Cargo.toml')"
+          CARGO_TOML_FILES="$(find . -type f -name 'Cargo.toml' -not -path './tools*')"
           
           for d in $CARGO_TOML_FILES; do
               pushd "$(dirname -- $d)" >/dev/null
